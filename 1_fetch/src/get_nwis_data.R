@@ -6,8 +6,7 @@ download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000",
   # replace tempdir() with "1_fetch/out" or another desired folder if you want to retain the download
   download_files <- file.path(dl_dir, paste0('nwis_', site_nums, '_data.csv'))
   
-  data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
-                         X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())
+
   # loop through files to download 
   for (download_file in download_files){
     download_nwis_site_data(download_file, parameterCd = parameterCd)

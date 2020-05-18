@@ -1,5 +1,8 @@
 combine_nwis_data <- function(download_files){
 
+  data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
+                         X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())
+  
   for (download_file in download_files){
 
     # read the downloaded data and append it to the existing data.frame

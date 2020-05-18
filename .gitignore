@@ -5,9 +5,4 @@
 
 .remake/*
 
-1_fetch/out/nwis_01427207_data.csv
-1_fetch/out/nwis_01432160_data.csv
-1_fetch/out/nwis_01435000_data.csv
-1_fetch/out/nwis_01436690_data.csv
-1_fetch/out/nwis_01466500_data.csv
-1_fetch/out/nwis_01477050_data.csv
+1_fetch/out/*.csv
