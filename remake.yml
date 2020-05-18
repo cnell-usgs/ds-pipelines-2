@@ -15,20 +15,17 @@ targets:
   all:
     depends: 3_visualize/out/figure_1.png
 
-  site_data:
-    command: download_nwis_data()
+  download_files:
+    command: download_nwis_data(dl_dir = '1_fetch/out')
+    
+  2_process/out/nwis_data.csv:
+    command: combine_nwis_data(download_files)
   
   1_fetch/out/site_info.csv:
-    command: nwis_site_info(target_name, site_data)
-
-  site_data_clean:
-    command: process_data(site_data)
-
-  site_data_annotated:
-    command: annotate_data(site_data_clean, site_filename = '1_fetch/out/site_info.csv')
+    command: nwis_site_info(target_name, nwis_data_path = '2_process/out/nwis_data.csv')
 
   site_data_styled:
-    command: style_data(site_data_annotated)	
+    command: process_and_style(nwis_data_path = '2_process/out/nwis_data.csv', site_filename = '1_fetch/out/site_info.csv')
 
   3_visualize/out/figure_1.png:
     command: plot_nwis_timeseries(target_name, site_data_styled)
