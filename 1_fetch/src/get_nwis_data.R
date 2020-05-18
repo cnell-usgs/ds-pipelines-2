@@ -1,24 +1,24 @@
 
-download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000", "01436690", "01466500", "01477050"), parameterCd = '00010'){
+download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000", "01436690", "01466500", "01477050"), parameterCd = '00010', dl_dir = '1_fetch/out'){
   
   # create the file names that are needed for download_nwis_site_data
   # tempdir() creates a temporary directory that is wiped out when you start a new R session; 
   # replace tempdir() with "1_fetch/out" or another desired folder if you want to retain the download
-  download_files <- file.path(tempdir(), paste0('nwis_', site_nums, '_data.csv'))
+  download_files <- file.path(dl_dir, paste0('nwis_', site_nums, '_data.csv'))
   
-  data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
-                         X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())
+
   # loop through files to download 
   for (download_file in download_files){
     download_nwis_site_data(download_file, parameterCd = parameterCd)
-    # read the downloaded data and append it to the existing data.frame
-    these_data <- read_csv(download_file, col_types = 'ccTdcc')
-    data_out <- rbind(data_out, these_data)
+    
   }
-  return(data_out)
+  return(download_files)
+  
 }
 
-nwis_site_info <- function(fileout, site_data){
+nwis_site_info <- function(fileout, nwis_data_path = '2_process/out/nwis_data.csv'){
+  
+  site_data <- read_csv(nwis_data_path)
   site_no <- unique(site_data$site_no)
   site_info <- dataRetrieval::readNWISsite(site_no)
   write_csv(site_info, fileout)
@@ -45,4 +45,10 @@ download_nwis_site_data <- function(filepath, parameterCd, startDate="2014-05-01
   write_csv(data_out, path = filepath)
   return(filepath)
 }
+
+
+
+
+
+
 
