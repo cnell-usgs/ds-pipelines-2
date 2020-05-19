@@ -1,5 +1,7 @@
 
-combine_nwis_data <- function(download_files = c('1_fetch/out/nwis_01427207_data.csv','1_fetch/out/nwis_01432160_data.csv','1_fetch/out/nwis_01435000_data.csv','1_fetch/out/nwis_01436690_data.csv','1_fetch/out/nwis_01466500_data.csv','1_fetch/out/nwis_01477050_data.csv')){
+combine_nwis_data <- function(...){
+  
+  download_files <- c(...)
   
   data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(), 
                          X_00010_00000 = c(), X_00010_00000_cd = c(), tz_cd = c())

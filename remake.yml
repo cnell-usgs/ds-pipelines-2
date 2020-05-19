@@ -34,7 +34,7 @@ targets:
     command: download_nwis_data(site_id = I("01477050"))
     
   nwis_data:
-    command: combine_nwis_data()
+    command: combine_nwis_data('1_fetch/out/nwis_01427207_data.csv','1_fetch/out/nwis_01432160_data.csv','1_fetch/out/nwis_01435000_data.csv','1_fetch/out/nwis_01436690_data.csv','1_fetch/out/nwis_01466500_data.csv','1_fetch/out/nwis_01477050_data.csv')
     
   1_fetch/out/site_info.csv:
     command: nwis_site_info(target_name, input_data = nwis_data)
